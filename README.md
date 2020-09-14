@@ -1,6 +1,20 @@
 # op-tee-ws-playground
 Playground for OP-TEE Workshop 2020
 
+## Setup playground environment
+Precondition is to have the Artifacts installed (SDK, RootFS as NFS, NFS Boot).
+You need to run the setup scripts once you open a fresh shell with
+```
+. script/setup.sh
+```
+
+### Console
+```
+sudo picocom -b 115200 /dev/ttyUSB0
+```
+
+### Login
+The login is root / root
 
 ## Artifacts for OP-TEE Workshop 2020
 
@@ -67,10 +81,3 @@ make
 make sdk
 ```
 
-### Console
-```
-sudo picocom -b 115200 /dev/ttyUSB0
-```
-
-### Login
-The login is root / root
