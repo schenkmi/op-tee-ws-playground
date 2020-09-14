@@ -1,0 +1,80 @@
+ifneq ($(PROJECT_ROOT),$(findstring $(PROJECT_ROOT),$(PWD)))
+  $(warning YOU ARE NOT MAKING FROM YOUR ACTIVE WORKING COPY)
+  $(warning You  are making from : $(PWD))
+  $(warning Your working copy is : $(PROJECT_ROOT))
+  $(error Make stopped)
+endif
+
+# Query number of CPU cores for parallel make
+CPU_CORES=$(shell nproc 2>/dev/null)
+
+###############################################################################
+# Compilers & Tools
+###############################################################################
+CROSS_PREFIX=aarch64-none-linux-gnu-
+
+CC                   = $(CROSS_PREFIX)gcc
+CXX                  = $(CROSS_PREFIX)g++
+TEST                 = test
+INSTALL              = install
+HOST_STRIP           = strip
+CROSS_AS             = $(CROSS_PREFIX)as
+CROSS_LD             = $(CROSS_PREFIX)ld
+CROSS_CC             = $(CROSS_PREFIX)gcc
+CROSS_CXX            = $(CROSS_PREFIX)g++
+CROSS_CPP            = $(CC) -E
+CROSS_AR             = $(CROSS_PREFIX)ar
+CROSS_NM             = $(CROSS_PREFIX)nm
+CROSS_STRIP          = $(CROSS_PREFIX)strip
+CROSS_RANLIB         = $(CROSS_PREFIX)ranlib
+CROSS_OBJCOPY        = $(CROSS_PREFIX)objcopy
+CROSS_OBJDUMP        = $(CROSS_PREFIX)objdump
+
+###############################################################################
+# Configuration Tools
+###############################################################################
+
+###############################################################################
+# Folder names
+###############################################################################
+SCRIPTS_ROOT                = $(PROJECT_ROOT)/scripts
+INT_ROOT                    = $(PROJECT_ROOT)/int
+EXAMPLE_ROOT                = $(PROJECT_ROOT)/examples
+NFS_ROOT                    = /export/nfs/rpi
+
+###############################################################################
+# OP-TEE
+###############################################################################
+TA_DEV_KIT_DIR=$(BR_SDK_SYSROOT)/lib/optee/export-ta_arm64
+# ta_dev_kit.mk relay on CROSS_COMPILE
+CROSS_COMPILE=$(CROSS_PREFIX)
+
+###############################################################################
+# Applications
+###############################################################################
+
+####################################
+# TBD
+####################################
+
+###############################################################################
+# Libraries
+###############################################################################
+
+####################################
+# TBD
+####################################
+
+###############################################################################
+# Some exports necessary in scripts
+###############################################################################
+
+###############################################################################
+# Makros
+###############################################################################
+distcleanMakro = @if [ -f "$(1)/Makefile" ]; then \
+                   $(MAKE) -C $(1) distclean; \
+                 fi;
+
+include $(PROJECT_ROOT)/int/helpers/build-utils.mk
+include $(PROJECT_ROOT)/int/helpers/legal-utils.mk

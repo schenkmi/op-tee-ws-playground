@@ -1,0 +1,28 @@
+include $(PROJECT_ROOT)/int/cflags/cflags_base.include
+
+C_APP_FLAGS_DEBUG=-O0 -g $(C_FLAGS_BASE)
+C_APP_FLAGS_SQUEEZ=-Os $(C_FLAGS_BASE)
+C_APP_FLAGS=-O2 $(C_FLAGS_BASE)
+
+ifeq ("$(NOENG_DEBUG)", "1")
+  DEBUG=y
+  STRIP=n
+endif
+ifeq ("$(NOENG_DEBUG)", "2")
+  DEBUG=n
+  STRIP=n
+endif
+
+# Add your debugging flag
+ifeq ($(DEBUG),y)
+	C_APP_CFLAGS+=$(C_APP_FLAGS_DEBUG)
+else
+ifeq ("$(NOENG_SQUEEZ)", "1")
+  C_APP_CFLAGS+=$(C_APP_FLAGS_SQUEEZ)
+else
+  C_APP_CFLAGS+=$(C_APP_FLAGS)
+endif
+endif
+
+C_APP_LDFLAGS=-rdynamic -pthread
+C_APP_LDFLAGS_UNDEF=-rdynamic -pthread -Wl,--allow-shlib-undefined

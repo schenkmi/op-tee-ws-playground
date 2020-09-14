@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# must be called with:
+# gugus@gugus scripts $ . setupccache
+
+CCACHE=`which ccache`
+CCACHE_LIMIT=4G
+
+CC=aarch64-none-linux-gnu-gcc
+CXX=aarch64-none-linux-gnu-g++
+
+if [ -f $CCACHE ]; then
+	if [ ! -d $WORK_ROOT/bin ]; then
+		mkdir $WORK_ROOT/bin
+	fi
+
+	if [ ! -L $WORK_ROOT/bin/$CXX ]; then
+		ln -s $CCACHE $WORK_ROOT/bin/$CXX
+	fi
+
+	if [ ! -L $WORK_ROOT/bin/$CC ]; then
+		ln -s $CCACHE $WORK_ROOT/bin/$CC
+	fi
+
+	if [ ! -d ${WORK_ROOT}/.${WORKING_COPY}-ccache ]; then
+		mkdir ${WORK_ROOT}/.${WORKING_COPY}-ccache
+	fi
+	
+	export CCACHE_DIR=${WORK_ROOT}/.${WORKING_COPY}-ccache
+
+	# check if path already set if not set it
+	LINKDIR=`echo $WORK_ROOT/bin`
+	echo $PATH | grep "$LINKDIR:" >/dev/null
+	if [ $? -ne 0 ]; then
+		echo $PATH | grep "$LINKDIR$" >/dev/null
+		if [ $? -ne 0 ]; then
+			export PATH=$LINKDIR:$PATH
+		fi
+	fi
+	
+	#configure ccache limit
+	$CCACHE -M $CCACHE_LIMIT
+else
+	echo "did not found ccache, please install it."
+fi
+
+

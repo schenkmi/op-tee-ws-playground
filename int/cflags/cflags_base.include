@@ -1,0 +1,3 @@
+C_FLAGS_BASE=-fstack-protector -fasynchronous-unwind-tables -pthread 		\
+             -Wall 												            \
+             -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE

@@ -1,0 +1,27 @@
+include $(PROJECT_ROOT)/int/cflags/cflags_base.include
+
+C_LIB_FLAGS_DEBUG=-O0 -g -fPIC -DPIC $(C_FLAGS_BASE)
+C_LIB_FLAGS_SQUEEZ=-Os -fpic $(C_FLAGS_BASE)
+C_LIB_FLAGS=-O2 -fpic $(C_FLAGS_BASE)
+
+ifeq ("$(NOENG_DEBUG)", "1")
+  DEBUG=y
+  STRIP=n
+endif
+ifeq ("$(NOENG_DEBUG)", "2")
+  DEBUG=n
+  STRIP=n
+endif
+
+# Add your debugging flag
+ifeq ($(DEBUG),y)
+	C_LIB_CFLAGS+=$(C_LIB_FLAGS_DEBUG)
+else
+ifeq ("$(NOENG_SQUEEZ)", "1")
+  C_LIB_CFLAGS+=$(C_LIB_FLAGS_SQUEEZ)
+else
+  C_LIB_CFLAGS+=$(C_LIB_FLAGS)
+endif
+endif
+
+C_LIB_LDFLAGS=-rdynamic -pthread -shared -Wl,-no-undefined
