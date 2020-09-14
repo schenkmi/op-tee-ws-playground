@@ -3,8 +3,15 @@ Playground for OP-TEE Workshop 2020
 
 ## Setup playground environment
 Precondition is to have the Artifacts installed (SDK, RootFS as NFS, NFS Boot).
+
+Clone the repository
+```
+git clone https://github.com/schenkmi/op-tee-ws-playground.git
+```
+
 You need to run the setup scripts once you open a fresh shell with
 ```
+cd op-tee-ws-playground
 . script/setup.sh
 ```
 
