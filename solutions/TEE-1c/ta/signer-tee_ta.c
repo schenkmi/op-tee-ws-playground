@@ -143,7 +143,7 @@ static TEE_Result sign(void *sess_ctx, uint32_t param_types, TEE_Param params[TE
         goto out;
     }
 
-    // set key for signing
+    // set key for signing
     if ((res = TEE_SetOperationKey(op, sp->key)) != TEE_SUCCESS) {
         EMSG("Call to TEE_SetOperationKey fail, res=0x%08x", res);
         goto out;
@@ -190,7 +190,7 @@ TEE_Result TA_CreateEntryPoint(void)
 
     inst->key_obj_id_size = strlen(filename_key);
 
-    // try to load ECDSA key set
+    // try to load ECDSA key set
     if ((res = TEE_OpenPersistentObject(TEE_STORAGE_PRIVATE,
                                         inst->key_obj_id, inst->key_obj_id_size,
                                         TEE_DATA_FLAG_ACCESS_READ | TEE_DATA_FLAG_SHARE_READ,
@@ -291,7 +291,7 @@ TEE_Result TA_OpenSessionEntryPoint(uint32_t param_types, TEE_Param __maybe_unus
         return TEE_ERROR_BAD_PARAMETERS;
     }
 
-    // allocate session
+    // allocate session
     struct ecdsa_session *sess = TEE_Malloc(sizeof(struct ecdsa_session), TEE_MALLOC_FILL_ZERO);
     if (!sess) {
         EMSG("TEE_Malloc failed");

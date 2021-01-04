@@ -103,11 +103,11 @@ unsigned char* hexstr_to_char(const char* hexstr)
 }
 
 // EC Pubkey TEE_ECC_CURVE_NIST_P256  each 32 bytes (256 bits)
-// hexdump -e '32/1 "%02X""\n"' pub.txt
+// hexdump -e '32/1 "%02X""\n"' pub.txt
 static const char *ecdsa_pubkey_x ="0FCA14C5FFFA234B737AFF8C430DAC95768240370033F58D4A06E7AA522D00A5";
 static const char *ecdsa_pubkey_y = "1AEC4CEBC8B6652D9C5368DABAACA7D02F1A8C14037A6E48FD47EF6B6D8E10CF";
 // EC signature R & S component each 32 bytes (256 bits)
-// hexdump -e '32/1 "%02X""\n"' signature.txt
+// hexdump -e '32/1 "%02X""\n"' signature.txt
 static const char *ecdsa_signature_r = "71C99AD481E92424D0E0A58A13F71F69E5978D5F8AC603972E6DB5FD9BC546EA";
 static const char *ecdsa_signature_s = "B3D2C189CE4DE13C31ACF64F4418F5DE79AAD951DDFDEED6DD7854F5EBAE01C7";
 
@@ -191,7 +191,7 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[])
     BIO_printf(outbio, "ECDSA Signature S: %s\n\n", value);
     OPENSSL_free(value);
 
-    // set ECDSA signature R and S part
+    // set ECDSA signature R and S part
     if (!ECDSA_SIG_set0(ecdsa_sig, ecdsa_signature_bn_r, ecdsa_signature_bn_s)) {
         BIO_printf(outbio, "ECDSA_SIG_set0() failed! Error: %s\n", ERR_error_string(ERR_get_error(), NULL));
     }
