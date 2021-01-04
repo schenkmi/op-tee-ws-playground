@@ -25,17 +25,17 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include<err.h>
-#include<errno.h>
-#include<fcntl.h>
-#include<inttypes.h>
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<unistd.h>
+#include <err.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <inttypes.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 #include <termios.h>
 
-#include<tee_client_api.h>
+#include <tee_client_api.h>
 /* To the the UUID (found the the TA's h-file(s)) */
 #include <signer-tee_ta.h>
 
